@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>namehack.club</title>
+
+    <meta name="description" content="An exclusive club of nerds">
+    <meta name="keywords" content="domain, name, hack, club, exclusive">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all">
+
+    <link rel="canonical" href="https://namehack.club/">
+
+    <link href="tachyons.min.css" rel="stylesheet">
+    <link href="base.css" rel="stylesheet">
+  </head>
+
+  <body>
+    {% for name in  names %}
+    <p>
+        <div>{{name.domain}}</div>
+        <div>{{name.name}}</div>
+        <div>{{name.email}}</div>
+    </p>
+    {% endfor %}
+  </body>
+</html>
