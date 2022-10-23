@@ -20,11 +20,7 @@
 
   <body>
     {% for name in  names %}
-    <p>
-        <div>{{name.domain}}</div>
-        <div>{{name.name}}</div>
-        <div>{{name.email}}</div>
-    </p>
+    <a href="{{ name.domain }}">{{name.name}} - {{name.domain}}</a>
     {% endfor %}
   </body>
 </html>
