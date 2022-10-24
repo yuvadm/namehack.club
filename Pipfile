@@ -6,9 +6,11 @@ name = "pypi"
 [packages]
 pyyaml = "*"
 jinja2 = "*"
+requests = "*"
 
 [dev-packages]
 
 [scripts]
 build = "python build.py"
+scan = "python scan.py"
 serve = "python -m http.server --directory build"
