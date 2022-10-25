@@ -9,6 +9,7 @@ jinja2 = "*"
 requests = "*"
 
 [dev-packages]
+black = "*"
 
 [scripts]
 build = "python build.py"
