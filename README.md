@@ -1,6 +1,6 @@
 # namehack.club
 
-An exclusive club of nerds.
+An exclusive club of nerds that own the domain hack to their name.
 
 ## Criteria
 
@@ -11,10 +11,19 @@ An exclusive club of nerds.
 
 Open a new pull request to this repository that adds a new YAML file to the [`names`](names) directory.
 
-If your domain name is `examp.le` the file name should be `example.yml`, and should include the following required fields:
+If your domain name is `examp.le` the file name should be `example.yml`, and the following minimal fields are required:
 
 ```yaml
 domain: examp.le
 name: Example Foo
+```
+
+Other optional fields are supported:
+
+```yaml
+domain: examp.le
+name: Example Foo
+url: https://examp.le/about/ # use to specify homepage URL, defaults to https://examp.le
+title: UI/UX designer # maximum 80 chars
 email: hi@examp.le
 ```

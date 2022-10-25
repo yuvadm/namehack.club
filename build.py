@@ -11,7 +11,7 @@ NAMES_DIR = ROOT_PATH / "names"
 BUILD_DIR = ROOT_PATH / "build"
 STATIC_DIR = ROOT_PATH / "static"
 
-REQUIRED_FIELDS = set(["domain", "name", "email"])
+REQUIRED_FIELDS = set(["domain", "name"])
 
 TEMPLATES = ["index.html"]
 
@@ -29,6 +29,7 @@ for name in listdir(NAMES_DIR):
         missing_fields = REQUIRED_FIELDS - set(fields.keys())
         if missing_fields:
             raise Exception(f"Missing required fields {missing_fields} in {name}")
+        
         names.append(fields)
 
 # render templates

@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
 
-    <title>namehack.club</title>
+<head>
+  <meta charset="utf-8">
 
-    <meta name="description" content="An exclusive club of nerds">
-    <meta name="keywords" content="domain, name, hack, club, exclusive">
+  <title>namehack.club</title>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all">
+  <meta name="description" content="An exclusive club of nerds that own the domain hack to their name">
+  <meta name="keywords" content="domain, name, hack, club, exclusive">
 
-    <link rel="canonical" href="https://namehack.club/">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all">
 
-    <link href="tachyons.min.css" rel="stylesheet">
-    <link href="base.css" rel="stylesheet">
-    <script src="https://skilled-twentyeight.namehack.club/script.js" data-site="SSTGQKAU" defer></script>
-  </head>
+  <link rel="canonical" href="https://namehack.club/">
 
-  <body class="code mw7-ns ph3 center">
-    <h1>Domain Name Hack Club</h1>
-    <p>An exclusive club of nerds that own the <a href="https://en.wikipedia.org/wiki/Domain_hack" class="link">domain hack</a> to their name, and serve their personal homepage from it.</p>
+  <link href="tachyons.min.css" rel="stylesheet">
+  <link href="base.css" rel="stylesheet">
+  <script src="https://skilled-twentyeight.namehack.club/script.js" data-site="SSTGQKAU" defer></script>
+</head>
 
-    <ul>
-      {% for name in  names %}
-      <li><a href="https://{{ name.domain }}">{{ name.name }}</li>
-      {% endfor %}
-    </ul>
-    <hr>
-    <footer>
-      Created by <a href="https://yuv.al">Yuval Adam</a>. Maintained collaboratively on <a href="https://github.com/yuvadm/namehack.club">Github</a>.
-    </footer>
-  </body>
+<body class="code mw7-ns ph3 center">
+  <h1>Domain Name Hack Club</h1>
+  <p>An exclusive club of nerds that own the <a href="https://en.wikipedia.org/wiki/Domain_hack" class="link">domain
+      hack</a> to their name, and serve their personal homepage from it.</p>
+
+  <ul>
+    {% for name in names %}
+    <li><a href="{{ [name.url, 'https://{{ name.domain }}']|first }}">{{ name.name }}</li>
+    {% endfor %}
+  </ul>
+  <hr>
+  <footer>
+    Created by <a href="https://yuv.al">Yuval Adam</a>. Maintained collaboratively on <a
+      href="https://github.com/yuvadm/namehack.club">Github</a>.
+  </footer>
+</body>
+
 </html>
