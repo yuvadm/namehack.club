@@ -20,20 +20,24 @@
   <script src="https://skilled-twentyeight.namehack.club/script.js" data-site="SSTGQKAU" defer></script>
 </head>
 
-<body class="code mw7-ns ph3 center">
-  <h1>Domain Name Hack Club</h1>
-  <p>An exclusive club of nerds that own the <a href="https://en.wikipedia.org/wiki/Domain_hack" class="link">domain
+<body class="mw7-ns ph3 center sans-serif">
+  <h1 class="f2 code">Doma.in Na.me Ha.ck Cl.ub</h1>
+  <p>An exclusive club of nerds that own the <a href="https://en.wikipedia.org/wiki/Domain_hack"
+      class="link blue">domain
       hack</a> to their name, and serve their personal homepage from it.</p>
+  <p>Are you one of us? <a href="https://github.com/yuvadm/namehack.club" class="link blue">Join the club.</a></p>
 
   <ul>
     {% for name in names %}
-    <li><a href="{{ [name.url, 'https://{{ name.domain }}']|first }}">{{ name.name }}</li>
+    <li><a href="{{ name.url or 'https://' + name.domain }}" class="link blue b">{{ name.name }}</a>{% if
+      name.title %}<span class="light-silver">, {{
+        name.title }}</span>{% endif %}</li>
     {% endfor %}
   </ul>
   <hr>
   <footer>
-    Created by <a href="https://yuv.al">Yuval Adam</a>. Maintained collaboratively on <a
-      href="https://github.com/yuvadm/namehack.club">Github</a>.
+    Created by <a href="https://yuv.al" class="link blue">Yuval Adam</a>. Maintained collaboratively on <a
+      href="https://github.com/yuvadm/namehack.club" class="link blue">Github</a>.
   </footer>
 </body>
 
