@@ -29,8 +29,8 @@
 
   <ul>
     {% for name in names %}
-    <li><a href="{{ name.url or 'https://' + name.domain }}" class="link blue b">{{ name.name }}</a>{% if
-      name.title %}<span class="light-silver">, {{
+    <li><a href="{{ name.url or 'https://' + name.domain }}" class="link blue b f3">{{ name.name }}</a>{% if
+      name.title %}<span class="light-silver ml2">{{
         name.title }}</span>{% endif %}</li>
     {% endfor %}
   </ul>
