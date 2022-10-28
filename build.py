@@ -29,8 +29,8 @@ for name in listdir(NAMES_DIR):
         missing_fields = REQUIRED_FIELDS - set(fields.keys())
         if missing_fields:
             raise Exception(f"Missing required fields {missing_fields} in {name}")
-
         names.append(fields)
+names = list(sorted(names, key=lambda x: x["domain"]))
 
 
 def render_link(value, classes):
