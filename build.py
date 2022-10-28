@@ -29,14 +29,26 @@ for name in listdir(NAMES_DIR):
         missing_fields = REQUIRED_FIELDS - set(fields.keys())
         if missing_fields:
             raise Exception(f"Missing required fields {missing_fields} in {name}")
-        
+
         names.append(fields)
 
+
+def render_link(value, classes):
+    name = value["name"].lower().split(" ")
+    domain = value["domain"].replace(".", "")
+    res = []
+    for part in name:
+        if part == domain:
+            url = value.get("url") or "https://" + value.get("domain")
+            res.append(f'<a href="{url}" class="{classes}">{value["domain"]}</a>')
+        else:
+            res.append(part)
+    return " ".join(res)
+
+
 # render templates
-env = Environment(
-    loader=PackageLoader("build"),
-    autoescape=select_autoescape()
-)
+env = Environment(loader=PackageLoader("build"), autoescape=select_autoescape())
+env.filters["render_link"] = render_link
 for template in TEMPLATES:
     t = env.get_template(template)
     index = t.render(names=names)
