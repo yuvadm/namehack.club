@@ -23,21 +23,22 @@
 <body class="mw7-ns ph3 center sans-serif">
   <h1 class="f2 code">Doma.in Na.me Ha.ck Cl.ub</h1>
   <p>An exclusive club of nerds that own the <a href="https://en.wikipedia.org/wiki/Domain_hack"
-      class="link dark-pink">domain hack</a> to their name, and serve their personal homepage from it.</p>
-  <p>Are you one of us? <a href="https://github.com/yuvadm/namehack.club" class="link dark-pink">Join the club.</a></p>
+      class="link dim dark-pink">domain hack</a> to their name, and serve their personal homepage from it.</p>
+  <p>Are you one of us? <a href="https://github.com/yuvadm/namehack.club" class="link dim dark-pink">Join the club.</a>
+  </p>
 
   <ul class="list">
     {% for name in names %}
     <li class="mb3">
-      <div class="f3">{{ name|render_link("link blue")|safe }}</div>
+      <div class="f3">{{ name|render_link("link dim blue")|safe }}</div>
       <div class="light-silver serif mt1">{{ name.title }}</div>
     </li>
     {% endfor %}
   </ul>
   <hr>
   <footer>
-    Created by <a href="https://yuv.al" class="link green">Yuval Adam</a>. Maintained collaboratively on <a
-      href="https://github.com/yuvadm/namehack.club" class="link green">Github</a>.
+    Created by <a href="https://yuv.al" class="link dim green">Yuval Adam</a>. Maintained collaboratively on <a
+      href="https://github.com/yuvadm/namehack.club" class="link dim green">Github</a>.
   </footer>
 </body>
 
