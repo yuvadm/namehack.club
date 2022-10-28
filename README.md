@@ -27,3 +27,13 @@ url: https://examp.le/about/ # use to specify homepage URL, defaults to https://
 title: UI/UX designer # maximum 80 chars
 email: hi@examp.le
 ```
+
+## Development
+
+Local development requires a basic Python environment with [pipenv](https://pipenv.pypa.io/en/latest/) installed.
+
+```bash
+$ pipenv sync --dev
+$ pipenv run build
+$ pipenv run serve
+```
