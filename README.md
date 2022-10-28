@@ -1,6 +1,6 @@
 # Domain Name Hack Club
 
-An exclusive club of nerds that own the domain hack to their name.
+**https://namehack.club/** - An exclusive club of nerds that own the domain hack to their name.
 
 ## Criteria
 
