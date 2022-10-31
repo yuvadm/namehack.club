@@ -12,6 +12,7 @@ BUILD_DIR = ROOT_PATH / "build"
 STATIC_DIR = ROOT_PATH / "static"
 
 REQUIRED_FIELDS = set(["domain", "name"])
+OPTIONAL_FIELDS = set(["url", "title", "email"])
 
 TEMPLATES = ["index.html"]
 
@@ -26,9 +27,13 @@ names = []
 for name in listdir(NAMES_DIR):
     with open(NAMES_DIR / name, "r") as f:
         fields = yaml.load(f.read(), Loader=yaml.Loader)
-        missing_fields = REQUIRED_FIELDS - set(fields.keys())
+        field_set = set(fields.keys())
+        missing_fields = REQUIRED_FIELDS - field_set
         if missing_fields:
             raise Exception(f"Missing required fields {missing_fields} in {name}")
+        invalid_fields = field_set - OPTIONAL_FIELDS - REQUIRED_FIELDS
+        if invalid_fields:
+            raise Exception(f"Invalid fields {invalid_fields} in {name}")
         names.append(fields)
 names = list(sorted(names, key=lambda x: x["domain"]))
 
