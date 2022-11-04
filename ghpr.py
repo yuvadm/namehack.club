@@ -21,5 +21,5 @@ with open(path, "r") as f:
         run(["git", "add", f"names/{fn}.yml"])
         run(["git", "commit", "-m", f"Add {domain}"])
         run(["git", "push", "-u", "origin", domain])
-        run(["gh", "pr", "create", "-f"])
+        run(["gh", "pr", "create", "-t", f"Add {domain}", "-b", f"Hey @{handle}, would you like to merge this PR adding you to https://namehack.club?"])
         run(["git", "checkout", "main"])
