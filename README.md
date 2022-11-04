@@ -26,6 +26,7 @@ name: Example Foo
 url: https://examp.le/about/ # use to specify homepage URL, defaults to https://examp.le
 title: UI/UX designer # maximum 80 chars
 email: hi@examp.le
+github: examplefoo
 ```
 
 ## Development

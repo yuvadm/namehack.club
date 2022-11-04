@@ -12,7 +12,7 @@ BUILD_DIR = ROOT_PATH / "build"
 STATIC_DIR = ROOT_PATH / "static"
 
 REQUIRED_FIELDS = set(["domain", "name"])
-OPTIONAL_FIELDS = set(["url", "title", "email"])
+OPTIONAL_FIELDS = set(["url", "title", "email", "github"])
 
 TEMPLATES = ["index.html"]
 
