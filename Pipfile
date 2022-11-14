@@ -12,6 +12,6 @@ requests = "*"
 black = "*"
 
 [scripts]
-build = "python scripts/build.py"
+build = "python build.py"
 scan = "python scripts/scan.py"
 serve = "python -m http.server --directory build"
