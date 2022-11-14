@@ -2,7 +2,7 @@ import requests
 
 from pathlib import Path
 
-ROOT_PATH = Path(__file__).parent
+ROOT_PATH = Path(__file__).parents[1]
 
 DATA_DIR = ROOT_PATH / "data"
 

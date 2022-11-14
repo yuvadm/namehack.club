@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from subprocess import run
 
-ROOT_PATH = Path(__file__).parent
+ROOT_PATH = Path(__file__).parents[1]
 
 path = sys.argv[1]
 
