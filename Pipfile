@@ -13,5 +13,5 @@ black = "*"
 
 [scripts]
 build = "python build.py"
-scan = "python scan.py"
+scan = "python scripts/scan.py"
 serve = "python -m http.server --directory build"
