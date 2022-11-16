@@ -27,7 +27,8 @@
       class="link dim dark-pink">domain hack</a> to their name, and serve their personal homepage from it. Are you one
     of us? <a href="https://github.com/yuvadm/namehack.club" class="link dim dark-pink">Join the club.</a></p>
 
-  <ul class="list pl0 pv4">
+  <h2 class="pt4">Members</h2>
+  <ul class="list pl0">
     {% for name in names %}
     <li class="mb3">
       <div class="f3">{{ name|render_link("link dim blue")|safe }}</div>
@@ -35,6 +36,17 @@
     </li>
     {% endfor %}
   </ul>
+
+  <h2 class="pt4">Candidates<span class="infolink"></span></h2>
+  <ul class="list pl0">
+    {% for name in candidates %}
+    <li class="mb3">
+      <div class="f4">{{ name|render_link("link dim blue")|safe }}</div>
+      <div class="light-silver serif mt1">{{ name.title }}</div>
+    </li>
+    {% endfor %}
+  </ul>
+
   <hr class="mt4 white-20">
   <footer class="tr lh-copy mb4">
     Created by <a href="https://yuv.al" class="link dim green">Yuval Adam</a>. Maintained collaboratively on <a
