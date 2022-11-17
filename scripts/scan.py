@@ -62,6 +62,14 @@ class NameScanner:
                 print(f"Fetching {d}...", end="")
                 self.fetch_names(d)
 
+    def consolidate_names(self):
+        for fn in listdir(DATA_DIR / "names"):
+            with open(DATA_DIR / "names" / fn, "r") as f:
+                j = json.load(f)
+                names = j["advanced"]
+                if names:
+                    print(f"{len(names)} in {fn}")
+
 
 ns = NameScanner()
-ns.fetch_names()
+ns.consolidate_names()
