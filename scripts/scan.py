@@ -106,14 +106,28 @@ class NameScanner:
             resps = await asyncio.gather(*tasks)
 
     def find_homepages(self):
-        count = 0
+        res = {}
         for fn in listdir(DATA_DIR / "homepages"):
             with open(DATA_DIR / "homepages" / fn, "r") as f:
-                name = fn[:-5].replace(".", "")
-                if name in f.read():
-                    count += 1
-                    print(name)
-        print(count)
+                domain = fn[:-5]
+                name = domain.replace(".", "")
+                text = f.read()
+                nip = name in text
+                github = "github" in text
+                li = "linkedin" in text
+                sale = "for sale" in text or "register" in text or "parking" in text
+                res["domain"] = {
+                    "name": name,
+                    "name_in_page": nip,
+                    "github": github,
+                    "linkedin": li,
+                }
+                ge = "✅" if github else " "
+                le = "✅" if li else " "
+                ne = "✅" if nip else " "
+                se = "❌" if sale else " "
+                print(f"{name:20}{ne}{ge}{le}{se}")
+        print(len(res))
 
 
 ns = NameScanner()
