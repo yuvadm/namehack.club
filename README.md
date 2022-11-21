@@ -16,6 +16,7 @@ If your domain name is `examp.le` the file name should be `example.yml`, and the
 ```yaml
 domain: examp.le
 name: Example Foo
+title: A short title describing Example # maximum 80 chars
 ```
 
 Other optional fields are supported:
@@ -23,11 +24,14 @@ Other optional fields are supported:
 ```yaml
 domain: examp.le
 name: Example Foo
-url: https://examp.le/about/ # use to specify homepage URL, defaults to https://examp.le
 title: UI/UX designer # maximum 80 chars
+url: https://examp.le/about/ # use to specify homepage URL, defaults to https://examp.le
 email: hi@examp.le
 github: examplefoo
+candidate: true
 ```
+
+Candidates are links to users who have not yet explicitly added their `name` and `title` to the list.
 
 ## Development
 
