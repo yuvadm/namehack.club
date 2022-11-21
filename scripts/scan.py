@@ -1,3 +1,5 @@
+import aiohttp
+import asyncio
 import json
 import requests
 
@@ -63,18 +65,59 @@ class NameScanner:
                 self.fetch_names(d)
 
     def consolidate_names(self):
+        res = set()
+        for fn in listdir(DATA_DIR / "names"):
+            with open(DATA_DIR / "names" / fn, "r") as f:
+                j = json.load(f)
+                names = j["advanced"]
+                if names:
+                    suffix = fn.split(".")[0]
+                    for name in names:
+                        n = name["name"].lower().split(suffix)[0]
+                        if n:
+                            res.add(n)
         with open(DATA_DIR / "allnames.txt", "w") as out:
-            for fn in listdir(DATA_DIR / "names"):
-                with open(DATA_DIR / "names" / fn, "r") as f:
-                    j = json.load(f)
-                    names = j["advanced"]
-                    if names:
-                        suffix = fn.split(".")[0]
-                        for name in names:
-                            n = name["name"].lower().split(suffix)[0]
-                            if n:
-                                out.write(n + f".{suffix}\n")
+            for n in res:
+                out.write(n + f".{suffix}\n")
+
+    async def get_homepage(self, session, domain):
+        try:
+            url = f"http://{domain}"
+            async with session.get(url) as res:
+                res = await res.text()
+                if res:
+                    print(f"Got {len(res)} bytes from {domain}")
+                    with open(DATA_DIR / "homepages" / f"{domain}.html", "w") as out:
+                        out.write(res)
+                return len(res)
+        except Exception as e:
+            return 0
+
+    async def fetch_homepages(self, N):
+        with open(DATA_DIR / "allnames.txt", "r") as f:
+            names = [x.strip() for x in f.readlines()][N * 1000 : 1000 * (N + 1)]
+
+        timeout = aiohttp.ClientTimeout(total=30)
+        async with aiohttp.ClientSession(timeout=timeout) as session:
+            tasks = []
+            for name in names:
+                tasks.append(asyncio.ensure_future(self.get_homepage(session, name)))
+
+            resps = await asyncio.gather(*tasks)
+
+    def find_homepages(self):
+        count = 0
+        for fn in listdir(DATA_DIR / "homepages"):
+            with open(DATA_DIR / "homepages" / fn, "r") as f:
+                name = fn[:-5].replace(".", "")
+                if name in f.read():
+                    count += 1
+                    print(name)
+        print(count)
 
 
 ns = NameScanner()
-ns.consolidate_names()
+# for i in range(0, 26):
+#     asyncio.run(ns.fetch_homepages(i))
+# ns.consolidate_names()
+ns.find_homepages()
