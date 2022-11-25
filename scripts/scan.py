@@ -122,12 +122,11 @@ class NameScanner:
                     "github": github,
                     "linkedin": li,
                 }
-                ge = "✅" if github else " "
-                le = "✅" if li else " "
-                ne = "✅" if nip else " "
-                se = "❌" if sale else " "
-                print(f"{name:20}{ne}{ge}{le}{se}")
-        print(len(res))
+                ge = "✅" if github else "  "
+                le = "✅" if li else "  "
+                ne = "✅" if nip else "  "
+                se = "❌" if sale else "  "
+                print(f"{ne}{ge}{le}{se}{name:20}")
 
 
 ns = NameScanner()
