@@ -20,24 +20,26 @@
   <script src="https://skilled-twentyeight.namehack.club/script.js" data-site="SSTGQKAU" defer></script>
 </head>
 
-<body class="mw7-ns ph3 center sans-serif">
-  <h1 class="mt5-ns f1 center code shadow">Doma<span class="silver">.</span>in Na<span class="silver">.</span>me
+<body class="mw7-ns ph3 center sans-serif bg-near-white">
+  <h1 class="mt5-ns f1 center code">Doma<span class="silver">.</span>in Na<span class="silver">.</span>me
     Ha<span class="silver">.</span>ck Cl<span class="silver">.</span>ub</h1>
-  <p class="lh-copy">An exclusive club of nerds that own the <a href="https://en.wikipedia.org/wiki/Domain_hack"
+  <p class="lh-copy f4">An exclusive club of geeks that own the <a href="https://en.wikipedia.org/wiki/Domain_hack"
       class="link dim dark-pink">domain hack</a> to their name, and serve their personal homepage from it. Are you one
-    of us? <a href="https://github.com/yuvadm/namehack.club" class="link dim dark-pink">Join the club.</a></p>
+    of us? Join the club by opening a pull
+    request on <a href="https://github.com/yuvadm/namehack.club" class="link dim dark-pink">Github</a> or send us an
+    email at <a href="mailto:join@namehack.club" class="link dim dark-pink">join@namehack.club</a>.</p>
 
-  <h2 class="pt4">Members</h2>
+  <h2 class="pt4">💎 Members</h2>
   <ul class="list pl0">
     {% for name in names %}
     <li class="mb3">
       <div class="f3">{{ name|render_link("link dim blue")|safe }}</div>
-      <div class="light-silver serif mt1">{{ name.title }}</div>
+      <div class="gray serif mt1">{{ name.title }}</div>
     </li>
     {% endfor %}
   </ul>
 
-  <h2 class="pt4">Candidates<span class="infolink"></span></h2>
+  <h2 class="pt4">⭐ Candidates</h2>
   <ul class="pl0 flex flex-wrap justify-between">
     {% for name in candidates %}
     <li class="mb3 dib pr3-ns pr1">
