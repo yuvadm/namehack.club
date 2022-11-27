@@ -4,6 +4,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from os import listdir, mkdir
 from pathlib import Path
 from shutil import copyfile
+from unidecode import unidecode
 
 ROOT_PATH = Path(__file__).parent
 
@@ -45,8 +46,8 @@ candidates = list(sorted(candidates, key=lambda x: x["domain"]))
 
 
 def render_link(value, classes):
-    name = value["name"].lower().split(" ")
-    domain = value["domain"].replace(".", "")
+    name = unidecode(value["name"]).lower().split(" ")
+    domain = unidecode(value["domain"]).replace(".", "")
     res = []
     for part in name:
         if part == domain:
