@@ -7,11 +7,14 @@ name = "pypi"
 pyyaml = "*"
 jinja2 = "*"
 requests = "*"
+aiohttp = "*"
+unidecode = "*"
 
 [dev-packages]
 black = "*"
 
 [scripts]
 build = "python build.py"
-scan = "python scan.py"
+scan = "python scripts/scan.py"
+ghpr = "python scripts/ghpr.py"
 serve = "python -m http.server --directory build"

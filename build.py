@@ -4,6 +4,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from os import listdir, mkdir
 from pathlib import Path
 from shutil import copyfile
+from unidecode import unidecode
 
 ROOT_PATH = Path(__file__).parent
 
@@ -12,7 +13,7 @@ BUILD_DIR = ROOT_PATH / "build"
 STATIC_DIR = ROOT_PATH / "static"
 
 REQUIRED_FIELDS = set(["domain", "name"])
-OPTIONAL_FIELDS = set(["url", "title", "email", "github"])
+OPTIONAL_FIELDS = set(["url", "title", "email", "github", "candidate"])
 
 TEMPLATES = ["index.html"]
 
@@ -24,6 +25,7 @@ for f in listdir(STATIC_DIR):
 
 # process all name yamls
 names = []
+candidates = []
 for name in listdir(NAMES_DIR):
     with open(NAMES_DIR / name, "r") as f:
         fields = yaml.load(f.read(), Loader=yaml.Loader)
@@ -34,13 +36,18 @@ for name in listdir(NAMES_DIR):
         invalid_fields = field_set - OPTIONAL_FIELDS - REQUIRED_FIELDS
         if invalid_fields:
             raise Exception(f"Invalid fields {invalid_fields} in {name}")
-        names.append(fields)
+
+        if fields.get("candidate"):
+            candidates.append(fields)
+        else:
+            names.append(fields)
 names = list(sorted(names, key=lambda x: x["domain"]))
+candidates = list(sorted(candidates, key=lambda x: x["domain"]))
 
 
 def render_link(value, classes):
-    name = value["name"].lower().split(" ")
-    domain = value["domain"].replace(".", "")
+    name = unidecode(value["name"]).lower().split(" ")
+    domain = unidecode(value["domain"]).replace(".", "")
     res = []
     for part in name:
         if part == domain:
@@ -56,6 +63,6 @@ env = Environment(loader=PackageLoader("build"), autoescape=select_autoescape())
 env.filters["render_link"] = render_link
 for template in TEMPLATES:
     t = env.get_template(template)
-    index = t.render(names=names)
+    index = t.render(names=names, candidates=candidates)
     with open(BUILD_DIR / "index.html", "w") as f:
         f.write(index)
