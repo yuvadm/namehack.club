@@ -9,11 +9,13 @@ jinja2 = "*"
 requests = "*"
 aiohttp = "*"
 unidecode = "*"
+click = "*"
 
 [dev-packages]
 black = "*"
 
 [scripts]
+manage = "python manage.py"
 build = "python build.py"
 scan = "python scripts/scan.py"
 ghpr = "python scripts/ghpr.py"
