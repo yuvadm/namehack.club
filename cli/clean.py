@@ -1,6 +1,6 @@
-import click
+from .base import cli
 
 
-@click.command()
+@cli.command()
 def clean():
     print("Cleaning..")
