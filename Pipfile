@@ -16,7 +16,7 @@ black = "*"
 
 [scripts]
 manage = "python manage.py"
-build = "python build.py"
+build = "python manage.py build"
 scan = "python scripts/scan.py"
 ghpr = "python scripts/ghpr.py"
 serve = "python -m http.server --directory build"
