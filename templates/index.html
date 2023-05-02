@@ -33,7 +33,7 @@
   <ul class="list pl0">
     {% for name in names %}
     <li class="mb3">
-      <div class="f3">{{ name|render_link("link dim blue")|safe }}</div>
+      <div class="f3">{{ name|render_link("link dim blue underline-hover")|safe }}</div>
       <div class="gray serif mt1">{{ name.title }}</div>
     </li>
     {% endfor %}
@@ -43,7 +43,7 @@
   <ul class="pl0 flex flex-wrap justify-between">
     {% for name in candidates %}
     <li class="mb3 dib pr3-ns pr1">
-      <span class="f4-ns f5">{{ name|render_link("link dim blue")|safe }}</span>
+      <span class="f4-ns f5">{{ name|render_link("link dim blue underline-hover")|safe }}</span>
     </li>
     {% endfor %}
   </ul>
