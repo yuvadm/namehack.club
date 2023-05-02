@@ -9,12 +9,14 @@ jinja2 = "*"
 requests = "*"
 aiohttp = "*"
 unidecode = "*"
+click = "*"
 
 [dev-packages]
 black = "*"
 
 [scripts]
-build = "python build.py"
+manage = "python manage.py"
+build = "python manage.py build"
 scan = "python scripts/scan.py"
 ghpr = "python scripts/ghpr.py"
 serve = "python -m http.server --directory build"
