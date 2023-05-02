@@ -6,6 +6,8 @@ import requests
 from pathlib import Path
 from os import makedirs, listdir
 
+from .base import cli
+
 ROOT_PATH = Path(__file__).parents[1]
 
 DATA_DIR = ROOT_PATH / "data"
@@ -129,8 +131,10 @@ class NameScanner:
                 print(f"{ne}{ge}{le}{se}{name:20}")
 
 
-ns = NameScanner()
-# for i in range(0, 26):
-#     asyncio.run(ns.fetch_homepages(i))
-# ns.consolidate_names()
-ns.find_homepages()
+@cli.command()
+def scan():
+    ns = NameScanner()
+    # for i in range(0, 26):
+    #     asyncio.run(ns.fetch_homepages(i))
+    # ns.consolidate_names()
+    ns.find_homepages()
