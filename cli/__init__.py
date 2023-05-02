@@ -9,8 +9,8 @@ __all__ = [cli, build, serve]
 
 # ugly workaround to avoid build failures in Python 3.8
 if "NETLIFY" not in os.environ:
-    from .clean import clean
+    from .validate import validate
     from .ghpr import ghpr
     from .scan import scan
 
-    __all__ += [clean, ghpr, scan]
+    __all__ += [validate, ghpr, scan]
