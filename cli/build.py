@@ -1,21 +1,16 @@
-import yaml
-
 from jinja2 import Environment, PackageLoader, select_autoescape
 from os import listdir, mkdir
 from pathlib import Path
 from shutil import copyfile
 from unidecode import unidecode
 
-from .base import cli
+from .base import cli, STASH
 
 ROOT_PATH = Path(__file__).parents[1]
 
 NAMES_DIR = ROOT_PATH / "names"
 BUILD_DIR = ROOT_PATH / "build"
 STATIC_DIR = ROOT_PATH / "static"
-
-REQUIRED_FIELDS = set(["domain", "name"])
-OPTIONAL_FIELDS = set(["url", "title", "email", "github", "candidate", "invalid"])
 
 TEMPLATES = ["index.html"]
 
@@ -32,38 +27,26 @@ def build():
     names = []
     candidates = []
 
-    for name in listdir(NAMES_DIR):
-        with open(NAMES_DIR / name, "r") as f:
-            fields = yaml.load(f.read(), Loader=yaml.Loader)
-            field_set = set(fields.keys())
+    for key in STASH.list_keys():
+        name = STASH.load(key)
+        if name.invalid is True:
+            continue
+        if name.candidate is True:
+            candidates.append(name)
+        else:
+            names.append(name)
 
-            missing_fields = REQUIRED_FIELDS - field_set
-            if missing_fields:
-                raise Exception(f"Missing required fields {missing_fields} in {name}")
-
-            invalid_fields = field_set - OPTIONAL_FIELDS - REQUIRED_FIELDS
-            if invalid_fields:
-                raise Exception(f"Invalid fields {invalid_fields} in {name}")
-
-            if fields.get("invalid"):
-                continue
-
-            if fields.get("candidate"):
-                candidates.append(fields)
-            else:
-                names.append(fields)
-
-    names = list(sorted(names, key=lambda x: x["domain"]))
-    candidates = list(sorted(candidates, key=lambda x: x["domain"]))
+    names = list(sorted(names, key=lambda x: x.domain))
+    candidates = list(sorted(candidates, key=lambda x: x.domain))
 
     def render_link(value, classes):
-        name = unidecode(value["name"]).lower().split(" ")
-        domain = unidecode(value["domain"]).replace(".", "")
+        name = unidecode(value.name).lower().split(" ")
+        domain = unidecode(value.domain).replace(".", "")
         res = []
         for part in name:
             if part == domain:
-                url = value.get("url") or "https://" + value.get("domain")
-                res.append(f'<a href="{url}" class="{classes}">{value["domain"]}</a>')
+                url = value.url or "https://" + value.domain
+                res.append(f'<a href="{url}" class="{classes}">{value.domain}</a>')
             else:
                 res.append(part)
         return " ".join(res)
