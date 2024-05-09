@@ -1,8 +1,6 @@
 import click
-import sys
 
 from pathlib import Path
-from subprocess import run
 
 from .base import cli
 
@@ -14,8 +12,7 @@ ROOT_PATH = Path(__file__).parents[1]
 def ghpr(path):
     with open(path, "r") as f:
         for line in f:
-            l = line.strip().split(",")
-            domain, handle, name = [x.strip() for x in l]
+            domain, handle, name = [x.strip() for x in line.strip().split(",")]
             handle = None if "@" in handle else handle
 
             fn = domain.replace(".", "")
