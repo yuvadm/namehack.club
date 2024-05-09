@@ -26,7 +26,7 @@ class NameScanner:
                 tld.lower() for tld in res.text.strip().split("\n")[1:] if len(tld) < 4
             ]
             f.write("\n".join(tlds).strip())
-            TLDS = set(tlds)
+            _TLDS = set(tlds)
 
     def fetch_homepage(self, domain):
         print(f"Fetching {domain}...", end="")
@@ -92,7 +92,7 @@ class NameScanner:
                     with open(DATA_DIR / "homepages" / f"{domain}.html", "w") as out:
                         out.write(res)
                 return len(res)
-        except Exception as e:
+        except Exception:
             return 0
 
     async def fetch_homepages(self, N):
@@ -105,7 +105,7 @@ class NameScanner:
             for name in names:
                 tasks.append(asyncio.ensure_future(self.get_homepage(session, name)))
 
-            resps = await asyncio.gather(*tasks)
+            _resps = await asyncio.gather(*tasks)
 
     def find_homepages(self):
         res = {}
