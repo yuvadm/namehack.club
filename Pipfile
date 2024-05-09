@@ -10,6 +10,7 @@ requests = "*"
 aiohttp = "*"
 unidecode = "*"
 click = "*"
+ymlstash = "*"
 
 [dev-packages]
 black = "*"
