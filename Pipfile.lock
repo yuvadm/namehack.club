@@ -670,12 +670,12 @@
         },
         "ymlstash": {
             "hashes": [
-                "sha256:1f5e801e637cb7426dbe34d117f494bdb856d9660737b743a799b1383a1fb051",
-                "sha256:27bcfeeded909cf60ec9d55ec53852fa21819d6977d2bebdc6890c76cded2c6d"
+                "sha256:80905d7501cfb1d2a3202d80d4b053b6cad1f6825c334f831acf6c22a2de37cd",
+                "sha256:a980fcc59b3a68dbf943520ddab665e7ba93d30de266555372783b2a9ec672c9"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8' and python_version < '4.0'",
-            "version": "==1.0.2"
+            "version": "==1.2.0"
         }
     },
     "develop": {
