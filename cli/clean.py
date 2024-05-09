@@ -10,5 +10,4 @@ def clean():
     names = stash.list_keys()
     for name in names:
         obj = stash.load(name)
-        stash.delete(obj.domain.replace(".", ""))
         stash.save(obj)
