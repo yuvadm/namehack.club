@@ -1,13 +1,9 @@
-import ymlstash
-
-from .base import cli, NAMES_DIR
-from .model import Name
+from .base import cli, STASH
 
 
 @cli.command()
 def clean():
-    stash = ymlstash.YmlStash(Name, NAMES_DIR, filter_none=True)
-    names = stash.list_keys()
+    names = STASH.list_keys()
     for name in names:
-        obj = stash.load(name)
-        stash.save(obj)
+        obj = STASH.load(name)
+        STASH.save(obj)
