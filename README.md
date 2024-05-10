@@ -11,7 +11,7 @@
 
 Open a new pull request to this repository that adds a new YAML file to the [`names`](names) directory.
 
-If your domain name is `examp.le` the file name should be `example.yml`, and the following minimal fields are required:
+If your domain name is `examp.le` the file name should be `examp.le.yml`, and the following minimal fields are required:
 
 ```yaml
 domain: examp.le
