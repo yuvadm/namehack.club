@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "namehackclub"
+version = "1.0.0"
+description = "An exclusive club of geeks that own the domain hack to their name."
+authors = ["Yuval Adam <_@yuv.al>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+jinja2 = "^3.1.4"
+ymlstash = "^1.2.0"
+click = "^8.1.7"
+
+[tool.poetry.group.dev.dependencies]
+unidecode = "^1.3.8"
+aiohttp = "^3.9.5"
+requests = "^2.31.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
