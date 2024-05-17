@@ -35,10 +35,16 @@ Candidates are links to users who have not yet explicitly added their `name` and
 
 ## Development
 
-Local development requires a basic Python environment with [pipenv](https://pipenv.pypa.io/en/latest/) installed.
+Local development requires a basic Python environment with [poetry](https://python-poetry.org/docs//) installed.
 
 ```bash
-$ pipenv sync --dev
-$ pipenv run build
-$ pipenv run serve
+$ poetry install --with=dev
+$ poetry run build
+$ poetry run serve
+```
+
+Other commands are accessible via:
+
+```bash
+$ poetry run cli
 ```
