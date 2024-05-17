@@ -1,3 +1,5 @@
+import click
+
 from jinja2 import Environment, PackageLoader, select_autoescape
 from os import listdir, mkdir
 from pathlib import Path
@@ -16,7 +18,8 @@ TEMPLATES = ["index.html"]
 
 
 @cli.command()
-def build():
+@click.option("--verbose", "-v", is_flag=True)
+def build(verbose):
     # copy static files
     if not BUILD_DIR.exists():
         mkdir(BUILD_DIR)
@@ -38,6 +41,12 @@ def build():
 
     names = list(sorted(names, key=lambda x: x.domain))
     candidates = list(sorted(candidates, key=lambda x: x.domain))
+
+    if verbose:
+        names_str = [x.domain for x in names]
+        candidates_str = [x.domain for x in candidates]
+        print(f"Got {names_str=}")
+        print(f"Got {candidates_str=}")
 
     def render_link(value, classes):
         name = unidecode(value.name).lower().split(" ")

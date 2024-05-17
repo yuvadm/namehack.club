@@ -4,6 +4,9 @@ version = "1.0.0"
 description = "An exclusive club of geeks that own the domain hack to their name."
 authors = ["Yuval Adam <_@yuv.al>"]
 readme = "README.md"
+packages = [
+    { include = "cli" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -16,6 +19,12 @@ unidecode = "^1.3.8"
 aiohttp = "^3.9.5"
 requests = "^2.31.0"
 
+[tool.poetry.scripts]
+cli = "cli:cli"
+build = "cli.build:build"
+serve = "cli.serve:serve"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
