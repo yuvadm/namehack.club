@@ -27,4 +27,3 @@ serve = "cli.serve:serve"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
