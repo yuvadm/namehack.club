@@ -1,6 +1,6 @@
 import click
 
-from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from os import listdir, mkdir
 from pathlib import Path
 from shutil import copyfile
@@ -62,7 +62,7 @@ def build(verbose):
 
     # render templates
     env = Environment(
-        loader=PackageLoader("manage"),
+        loader=FileSystemLoader("templates"),
         autoescape=select_autoescape(),
     )
     env.filters["render_link"] = render_link
