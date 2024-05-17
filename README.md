@@ -48,3 +48,9 @@ Other commands are accessible via:
 ```bash
 $ poetry run cli
 ```
+
+Netlify build requires an updated `requirements.txt` file, if dependencies have changed, run:
+
+```bash
+$ poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
+```
