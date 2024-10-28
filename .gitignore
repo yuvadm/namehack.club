@@ -2,4 +2,4 @@ __pycache__/
 build/
 data/
 
-poetry.lock
+*.egg-info/

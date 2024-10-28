@@ -559,7 +559,7 @@ wheels = [
 [[package]]
 name = "namehackclub"
 version = "1.0.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "jinja2" },
