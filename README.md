@@ -35,22 +35,22 @@ Candidates are links to users who have not yet explicitly added their `name` and
 
 ## Development
 
-Local development requires a basic Python environment with [poetry](https://python-poetry.org/docs//) installed.
+Local development requires a basic Python environment with [uv](https://docs.astral.sh/uv/) installed.
 
 ```bash
-$ poetry install --with=dev
-$ poetry run build
-$ poetry run serve
+$ uv sync --extra=dev
+$ uv run build
+$ uv run serve
 ```
 
 Other commands are accessible via:
 
 ```bash
-$ poetry run cli
+$ uv run cli
 ```
 
 Netlify build requires an updated `requirements.txt` file, if dependencies have changed, run:
 
 ```bash
-$ poetry export --without-hashes --without dev -f requirements.txt -o requirements.txt
+$ uv pip compile pyproject.toml -o requirements.txt
 ```
