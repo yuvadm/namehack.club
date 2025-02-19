@@ -51,11 +51,13 @@ def build(verbose):
     def render_link(value, classes):
         name = unidecode(value.name).lower().split(" ")
         domain = unidecode(value.domain).replace(".", "")
+        candidate = value.candidate
+        rel = ' rel="nofollow"' if candidate else ""
         res = []
         for part in name:
             if part == domain:
                 url = value.url or "https://" + value.domain
-                res.append(f'<a href="{url}" class="{classes}">{value.domain}</a>')
+                res.append(f'<a href="{url}" class="{classes}"{rel}>{value.domain}</a>')
             else:
                 res.append(part)
         return " ".join(res)
