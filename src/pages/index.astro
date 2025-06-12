@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import NameLink from "../components/NameLink.astro";
 
 import "../styles/global.css";
 
@@ -34,59 +35,23 @@ const candidates = allNames.filter(name => name.data.candidate === true);
 
 	<h2 class="pt-8 text-2xl font-bold">💎 Members</h2>
 	<ul class="list-none pl-0">
-		{members.map((name) => {
-			const nameParts = name.data.name.toLowerCase().split(" ");
-			const domain = name.data.domain.replace(".", "");
-			const url = name.data.url || `https://${name.data.domain}`;
-			
-			return (
-				<li class="mb-3">
-					<div class="text-2xl">
-						{nameParts.map((part, index) => (
-							<>
-								{index > 0 && " "}
-								{part === domain ? (
-									<a href={url} class="text-blue-600 hover:text-blue-800 hover:underline">
-										{name.data.domain}
-									</a>
-								) : (
-									<span>{part}</span>
-								)}
-							</>
-						))}
-					</div>
-					<div class="text-gray-600 font-serif mt-1">{name.data.title}</div>
-				</li>
-			);
-		})}
+		{members.map((name) => (
+			<li class="mb-3">
+				<div class="text-2xl">
+					<NameLink name={name} size="large" />
+				</div>
+				<div class="text-gray-600 font-serif mt-1">{name.data.title}</div>
+			</li>
+		))}
 	</ul>
 
 	<h2 class="pt-8 text-2xl font-bold">⭐ Candidates</h2>
 	<ul class="pl-0 flex flex-wrap justify-between">
-		{candidates.map((name) => {
-			const nameParts = name.data.name.toLowerCase().split(" ");
-			const domain = name.data.domain.replace(".", "");
-			const url = name.data.url || `https://${name.data.domain}`;
-			
-			return (
-				<li class="mb-3 inline-block pr-3">
-					<span class="text-xl">
-						{nameParts.map((part, index) => (
-							<>
-								{index > 0 && " "}
-								{part === domain ? (
-									<a href={url} class="text-blue-600 hover:text-blue-800 hover:underline" rel="nofollow">
-										{name.data.domain}
-									</a>
-								) : (
-									<span>{part}</span>
-								)}
-							</>
-						))}
-					</span>
-				</li>
-			);
-		})}
+		{candidates.map((name) => (
+			<li class="mb-3 inline-block pr-3">
+				<NameLink name={name} size="small" />
+			</li>
+		))}
 	</ul>
 
 	<hr class="mt-8 border-gray-200">
