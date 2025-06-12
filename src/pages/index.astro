@@ -1,78 +1,98 @@
 ---
-import Counter from "../components/Counter";
-import StandardLayout from "../layouts/StandardLayout.astro";
 import { getCollection } from "astro:content";
 
-// Get the latest 3 blog posts
-const latestPosts = await getCollection("blog");
-latestPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const featuredPosts = latestPosts.slice(0, 3);
+import "../styles/global.css";
+
+// Get all names from the collection
+const allNames = await getCollection("names");
+const members = allNames.filter(name => name.data.candidate !== true);
+const candidates = allNames.filter(name => name.data.candidate === true);
 ---
 
-<StandardLayout title="Astro - Home">
-	<section class="py-12">
-		<div class="text-center mb-12">
-			<h1 class="text-5xl font-bold text-gray-900 mb-4">
-				Welcome to Astro
-			</h1>
-			<p class="text-xl text-gray-600 max-w-3xl mx-auto">
-				A modern framework for building fast, content-focused websites.
-			</p>
-			<div class="mt-8">
-				<Counter client:load />
-			</div>
-		</div>
-	</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Domain Name Hack Club</title>
+	<meta name="description" content="An exclusive club of nerds that own the domain hack to their name">
+	<meta name="keywords" content="domain, name, hack, club, exclusive, personal, homepage">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="all">
+	<link rel="canonical" href="https://namehack.club/">
+	<script src="https://cdn.usefathom.com/script.js" data-site="SSTGQKAU" defer></script>
+</head>
 
-	<section
-		class="py-12 bg-gray-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
-	>
-		<div class="max-w-7xl mx-auto">
-			<div class="flex justify-between items-center mb-8">
-				<h2 class="text-3xl font-bold text-gray-900">
-					Latest Blog Posts
-				</h2>
-				<a
-					href="/blog"
-					class="text-blue-600 hover:text-blue-800 font-medium"
-					>View all posts →</a
-				>
-			</div>
+<body class="max-w-4xl mx-auto px-4 font-sans">
+	<h1 class="mt-20 text-5xl text-center font-mono">Doma<span class="text-gray-400">.</span>in Na<span class="text-gray-400">.</span>me
+		Ha<span class="text-gray-400">.</span>ck Cl<span class="text-gray-400">.</span>ub</h1>
+	<p class="leading-relaxed text-xl">An exclusive club of geeks that serve their personal homepage from the <a
+			href="https://en.wikipedia.org/wiki/Domain_hack" class="text-pink-600 hover:text-pink-800">domain hack</a> to their name. Are you
+		one of us? Join the club by opening a pull
+		request on <a href="https://github.com/yuvadm/namehack.club" class="text-pink-600 hover:text-pink-800">Github</a> or send us an
+		email at <a href="mailto:join@namehack.club" class="text-pink-600 hover:text-pink-800">join@namehack.club</a>.</p>
 
-			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-				{
-					featuredPosts.map((post) => (
-						<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-							<a href={`/blog/${post.slug}`} class="block">
-								{post.data.image && (
-									<img
-										src={post.data.image}
-										alt={post.data.title}
-										class="w-full h-48 object-cover"
-									/>
+	<h2 class="pt-8 text-2xl font-bold">💎 Members</h2>
+	<ul class="list-none pl-0">
+		{members.map((name) => {
+			const nameParts = name.data.name.toLowerCase().split(" ");
+			const domain = name.data.domain.replace(".", "");
+			const url = name.data.url || `https://${name.data.domain}`;
+			
+			return (
+				<li class="mb-3">
+					<div class="text-2xl">
+						{nameParts.map((part, index) => (
+							<>
+								{index > 0 && " "}
+								{part === domain ? (
+									<a href={url} class="text-blue-600 hover:text-blue-800 hover:underline">
+										{name.data.domain}
+									</a>
+								) : (
+									<span>{part}</span>
 								)}
-								<div class="p-6">
-									<h3 class="text-xl font-semibold text-gray-900 mb-2">
-										{post.data.title}
-									</h3>
-									<p class="text-sm text-gray-500 mb-3">
-										{new Date(
-											post.data.pubDate,
-										).toLocaleDateString("en-US", {
-											year: "numeric",
-											month: "long",
-											day: "numeric",
-										})}
-									</p>
-									<p class="text-gray-700">
-										{post.data.description}
-									</p>
-								</div>
-							</a>
-						</article>
-					))
-				}
-			</div>
-		</div>
-	</section>
-</StandardLayout>
+							</>
+						))}
+					</div>
+					<div class="text-gray-600 font-serif mt-1">{name.data.title}</div>
+				</li>
+			);
+		})}
+	</ul>
+
+	<h2 class="pt-8 text-2xl font-bold">⭐ Candidates</h2>
+	<ul class="pl-0 flex flex-wrap justify-between">
+		{candidates.map((name) => {
+			const nameParts = name.data.name.toLowerCase().split(" ");
+			const domain = name.data.domain.replace(".", "");
+			const url = name.data.url || `https://${name.data.domain}`;
+			
+			return (
+				<li class="mb-3 inline-block pr-3">
+					<span class="text-xl">
+						{nameParts.map((part, index) => (
+							<>
+								{index > 0 && " "}
+								{part === domain ? (
+									<a href={url} class="text-blue-600 hover:text-blue-800 hover:underline" rel="nofollow">
+										{name.data.domain}
+									</a>
+								) : (
+									<span>{part}</span>
+								)}
+							</>
+						))}
+					</span>
+				</li>
+			);
+		})}
+	</ul>
+
+	<hr class="mt-8 border-gray-200">
+	<footer class="text-right leading-relaxed mb-4">
+		Created by <a href="https://yuv.al" class="text-green-600 hover:text-green-800">Yuval Adam</a>. Maintained collaboratively on <a
+			href="https://github.com/yuvadm/namehack.club" class="text-green-600 hover:text-green-800">Github</a>.
+	</footer>
+</body>
+</html>

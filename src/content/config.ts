@@ -1,19 +1,31 @@
 import { defineCollection, z } from 'astro:content';
 
-// Define the blog collection schema
-const blogCollection = defineCollection({
-  type: 'content',
+const namesCollection = defineCollection({
+  type: 'data',
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date(),
-    image: z.string().optional(),
-    author: z.string().default('Anonymous'),
-    tags: z.array(z.string()).default([]),
-  }),
+    domain: z.string(),
+    name: z.string(),
+    title: z.string().max(80).optional(),
+    url: z.string().url().optional(),
+    email: z.string().email().optional(),
+    github: z.string().optional(),
+    candidate: z.boolean().optional(),
+  }).refine(
+    (data) => {
+      // If not a candidate, title is required
+      if (!data.candidate) {
+        return !!data.title;
+      }
+      return true;
+    },
+    {
+      message: "Title is required for non-candidates",
+      path: ["title"],
+    }
+  ),
 });
 
 // Export the collections
 export const collections = {
-  'blog': blogCollection,
+  'names': namesCollection,
 };
