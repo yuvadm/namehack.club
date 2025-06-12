@@ -1,0 +1,78 @@
+---
+import Counter from "../components/Counter";
+import StandardLayout from "../layouts/StandardLayout.astro";
+import { getCollection } from "astro:content";
+
+// Get the latest 3 blog posts
+const latestPosts = await getCollection("blog");
+latestPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const featuredPosts = latestPosts.slice(0, 3);
+---
+
+<StandardLayout title="Astro - Home">
+	<section class="py-12">
+		<div class="text-center mb-12">
+			<h1 class="text-5xl font-bold text-gray-900 mb-4">
+				Welcome to Astro
+			</h1>
+			<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+				A modern framework for building fast, content-focused websites.
+			</p>
+			<div class="mt-8">
+				<Counter client:load />
+			</div>
+		</div>
+	</section>
+
+	<section
+		class="py-12 bg-gray-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8"
+	>
+		<div class="max-w-7xl mx-auto">
+			<div class="flex justify-between items-center mb-8">
+				<h2 class="text-3xl font-bold text-gray-900">
+					Latest Blog Posts
+				</h2>
+				<a
+					href="/blog"
+					class="text-blue-600 hover:text-blue-800 font-medium"
+					>View all posts →</a
+				>
+			</div>
+
+			<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+				{
+					featuredPosts.map((post) => (
+						<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+							<a href={`/blog/${post.slug}`} class="block">
+								{post.data.image && (
+									<img
+										src={post.data.image}
+										alt={post.data.title}
+										class="w-full h-48 object-cover"
+									/>
+								)}
+								<div class="p-6">
+									<h3 class="text-xl font-semibold text-gray-900 mb-2">
+										{post.data.title}
+									</h3>
+									<p class="text-sm text-gray-500 mb-3">
+										{new Date(
+											post.data.pubDate,
+										).toLocaleDateString("en-US", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})}
+									</p>
+									<p class="text-gray-700">
+										{post.data.description}
+									</p>
+								</div>
+							</a>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</StandardLayout>
