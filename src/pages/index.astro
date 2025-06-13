@@ -8,19 +8,41 @@ import "../styles/global.css";
 const allNames = await getCollection("names");
 const members = allNames.filter(name => name.data.candidate !== true);
 const candidates = allNames.filter(name => name.data.candidate === true);
+
+const title = "Domain Name Hack Club";
+const description = "An exclusive club of nerds that own the domain hack to their name";
+const url = "https://namehack.club";
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Domain Name Hack Club</title>
-	<meta name="description" content="An exclusive club of nerds that own the domain hack to their name">
+	<title>{title}</title>
+	
+	<!-- Basic Meta Tags -->
+	<meta name="description" content={description}>
 	<meta name="keywords" content="domain, name, hack, club, exclusive, personal, homepage">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="robots" content="all">
-	<link rel="canonical" href="https://namehack.club/">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Yuval Adam">
+	<link rel="canonical" href={url}>
+
+	<meta property="og:type" content="website">
+	<meta property="og:url" content={url}>
+	<meta property="og:title" content={title}>
+	<meta property="og:description" content={description}>
+	<meta property="og:site_name" content={title}>
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:url" content={url}>
+	<meta name="twitter:title" content={title}>
+	<meta name="twitter:description" content={description}>
+	<meta name="twitter:creator" content="@yuvadm">
+
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 	<script src="https://cdn.usefathom.com/script.js" data-site="SSTGQKAU" defer></script>
 </head>
 
