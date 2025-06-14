@@ -74,14 +74,15 @@ const url = "https://namehack.club";
 			<h2 class="text-3xl font-semibold mb-8 text-gray-900 flex items-center gap-3">
 				<span class="text-2xl">💎</span>
 				<span>Members</span>
+				<span class="text-lg text-gray-500 font-light">({members.length})</span>
 			</h2>
-			<ul class="space-y-6">
+			<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 				{members.map((name) => (
-					<li class="border-l-4 border-gray-100 pl-6 py-2 hover:border-pink-200 transition-colors duration-200">
-						<div class="text-2xl lg:text-3xl font-medium">
-							<NameLink name={name} size="large" />
+					<li class="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200">
+						<div class="text-lg font-medium mb-1">
+							<NameLink name={name} size="medium" />
 						</div>
-						<div class="text-gray-600 text-lg mt-2 font-light">{name.data.title}</div>
+						<div class="text-gray-600 text-sm font-light">{name.data.title}</div>
 					</li>
 				))}
 			</ul>
@@ -91,16 +92,18 @@ const url = "https://namehack.club";
 			<h2 class="text-3xl font-semibold mb-8 text-gray-900 flex items-center gap-3">
 				<span class="text-2xl">⭐</span>
 				<span>Candidates</span>
+				<span class="text-lg text-gray-500 font-light">({candidates.length})</span>
 			</h2>
-			<ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+			<ul class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
 				{candidates.map((name) => (
-					<li class="p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+					<li class="p-1 rounded hover:bg-gray-50 transition-colors duration-200 text-center text-xs">
 						<NameLink name={name} size="small" />
 					</li>
 				))}
 			</ul>
 		</section>
 	</main>
+
 
 	<hr class="mt-16 mb-8 border-gray-200">
 	<footer class="text-center text-gray-600 leading-relaxed pb-8">
