@@ -15,7 +15,6 @@ const candidates = allNames.filter((name) => name.data.candidate === true);
 const title = "Domain Name Hack Club";
 const description =
 	"An exclusive club of nerds that own the domain hack to their name";
-const url = "https://namehack.club";
 ---
 
 <!doctype html>
@@ -32,16 +31,16 @@ const url = "https://namehack.club";
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="robots" content="index, follow" />
 		<meta name="author" content="Yuval Adam" />
-		<link rel="canonical" href={url} />
+		<link rel="canonical" href={Astro.url} />
 
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={url} />
+		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:site_name" content={title} />
 
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:url" content={url} />
+		<meta name="twitter:url" content={Astro.url} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:creator" content="@yuvadm" />
