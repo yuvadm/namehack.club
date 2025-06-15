@@ -1,0 +1,54 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Astro Site",
+  description = "A simple Astro site with blog functionality",
+} = Astro.props;
+
+import Analytics from "../components/Analytics.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <Analytics />
+  </head>
+  <body class="min-h-screen bg-gray-50 flex flex-col">
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="flex justify-between items-center">
+          <a href="/" class="text-xl font-bold text-gray-900">Astro Blog</a>
+          <div class="flex space-x-6">
+            <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+            <a href="/blog" class="text-gray-700 hover:text-blue-600">Blog</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-center text-gray-500 text-sm">
+          &copy; {new Date().getFullYear()} Astro Blog. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

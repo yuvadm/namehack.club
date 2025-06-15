@@ -1,0 +1,33 @@
+---
+import { analytics } from "../config/analytics";
+
+const GOOGLE_ANALYTICS_ID = analytics.googleAnalyticsId;
+const FATHOM_ANALYTICS_ID = analytics.fathomAnalyticsId;
+---
+
+{
+    GOOGLE_ANALYTICS_ID && (
+        <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+        />
+        <script define:vars={{ GOOGLE_ANALYTICS_ID }} is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", GOOGLE_ANALYTICS_ID);
+        </script>
+    )
+}
+{
+    FATHOM_ANALYTICS_ID && (
+        <script
+            src="https://cdn.usefathom.com/script.js"
+            data-site={FATHOM_ANALYTICS_ID}
+            defer
+        />
+    )
+}
+
