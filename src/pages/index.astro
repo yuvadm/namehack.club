@@ -103,9 +103,6 @@ const url = "https://namehack.club";
 				>
 					<span class="text-2xl">💎</span>
 					<span>Members</span>
-					<span class="text-lg text-gray-500 font-light"
-						>({members.length})</span
-					>
 				</h2>
 				<ul
 					class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
@@ -131,16 +128,13 @@ const url = "https://namehack.club";
 				>
 					<span class="text-2xl">⭐</span>
 					<span>Candidates</span>
-					<span class="text-lg text-gray-500 font-light"
-						>({candidates.length})</span
-					>
 				</h2>
 				<ul
-					class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+					class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2"
 				>
 					{
 						candidates.map((name) => (
-							<li class="p-1 rounded hover:bg-gray-50 transition-colors duration-200 text-center text-xs">
+							<li class="p-1 rounded hover:bg-gray-50 transition-colors duration-200 text-center text-xs overflow-hidden">
 								<NameLink name={name} size="small" />
 							</li>
 						))

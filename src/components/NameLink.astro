@@ -22,7 +22,7 @@ const sizeClasses = {
 };
 ---
 
-<span class={sizeClasses[size]}>
+<span class={`${sizeClasses[size]} break-words`}>
   {nameParts.map((part, index) => (
     <>
       {index > 0 && " "}
