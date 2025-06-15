@@ -13,7 +13,10 @@ export interface Props {
 }
 
 const { name, size = "large", showAsLink = true } = Astro.props;
-const nameParts = name.data.name.toLowerCase().split(" ");
+const nameParts = name.data.name
+  .toLowerCase()
+  .split(" ")
+  .filter((part) => part.trim() !== "");
 const domain = name.data.domain.replace(".", "");
 const url = name.data.url || `https://${name.data.domain}`;
 const domainExtension = name.data.domain.split(".")[1];
@@ -31,23 +34,23 @@ const sizeClasses = {
       <>
         {index > 0 && " "}
         {part === domain ? (
-          showAsLink ? (
+          showAsLink ? ( // comments here to prevent whitespace introduced by formatter
             <a
               href={url}
               class="text-blue-600 hover:text-blue-800 hover:underline domain-link"
               rel={name.data.candidate ? "nofollow" : undefined}
               data-extension={domainExtension}
             >
-              <span class="domain-base">{domainBase}</span>
-              <span class="domain-extension">{domainExtension}</span>
-            </a>
+              <span class="domain-base">{domainBase}</span><!--
+              --><span class="domain-extension">{domainExtension}</span><!--
+              --></a>
           ) : (
             <span
               class="text-blue-600 domain-link"
               data-extension={domainExtension}
             >
-              <span class="domain-base">{domainBase}</span>
-              <span class="domain-extension">{domainExtension}</span>
+              <span class="domain-base">{domainBase}</span><!--
+              --><span class="domain-extension">{domainExtension}</span>
             </span>
           )
         ) : (
@@ -64,4 +67,3 @@ const sizeClasses = {
     opacity: 0.7;
   }
 </style>
-
