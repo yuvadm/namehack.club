@@ -46,12 +46,12 @@ const sizeClasses = {
               --></a>
           ) : (
             <span
-              class="text-blue-600 domain-link"
+              class="text-blue-600 domain-link group-hover:underline"
               data-extension={domainExtension}
             >
               <span class="domain-base">{domainBase}</span><!--
-              --><span class="domain-extension">{domainExtension}</span>
-            </span>
+              --><span class="domain-extension">{domainExtension}</span><!--
+            --></span>
           )
         ) : (
           <span>{part}</span>

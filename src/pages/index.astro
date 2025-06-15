@@ -115,7 +115,7 @@ const description =
 										name.data.url ||
 										`https://${name.data.domain}`
 									}
-									class="block border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200"
+									class="group block border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200"
 									rel={
 										name.data.candidate
 											? "nofollow"
@@ -151,7 +151,7 @@ const description =
 				>
 					{
 						candidates.map((name) => (
-							<li class="p-1 rounded hover:bg-gray-50 transition-colors duration-200 text-center text-xs overflow-hidden">
+							<li class="p-1 text-center text-xs overflow-hidden">
 								<NameLink
 									name={name}
 									size="small"
