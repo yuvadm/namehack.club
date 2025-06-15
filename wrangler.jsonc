@@ -4,5 +4,11 @@
     "compatibility_date": "2025-06-15",
     "assets": {
         "directory": "./dist"
-    }
+    },
+    "routes": [
+        {
+            "pattern": "namehack.club",
+            "custom_domain": true
+        }
+    ]
 }
