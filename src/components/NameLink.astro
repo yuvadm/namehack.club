@@ -1,0 +1,42 @@
+---
+interface Props {
+  name: {
+    data: {
+      name: string;
+      domain: string;
+      url?: string;
+      candidate?: boolean;
+    };
+  };
+  size?: 'large' | 'small';
+}
+
+const { name, size = 'large' } = Astro.props;
+const nameParts = name.data.name.toLowerCase().split(" ");
+const domain = name.data.domain.replace(".", "");
+const url = name.data.url || `https://${name.data.domain}`;
+
+const sizeClasses = {
+  large: 'text-2xl',
+  small: 'text-xl'
+};
+---
+
+<span class={sizeClasses[size]}>
+  {nameParts.map((part, index) => (
+    <>
+      {index > 0 && " "}
+      {part === domain ? (
+        <a 
+          href={url} 
+          class="text-blue-600 hover:text-blue-800 hover:underline"
+          rel={name.data.candidate ? "nofollow" : undefined}
+        >
+          {name.data.domain}
+        </a>
+      ) : (
+        <span>{part}</span>
+      )}
+    </>
+  ))}
+</span> 
