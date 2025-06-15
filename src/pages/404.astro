@@ -1,0 +1,44 @@
+---
+import "../styles/global.css";
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/jetbrains-mono/400.css";
+
+const title = "404 - Page Not Found | Domain Name Hack Club";
+const description = "Page not found";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	</head>
+
+	<body
+		class="h-screen flex items-center justify-center bg-white"
+		style="font-family: 'Inter', system-ui, -apple-system, sans-serif; line-height: 1.7;"
+	>
+		<main class="text-center px-6">
+			<h1
+				class="text-8xl font-light tracking-tight mb-8 text-gray-300"
+				style="font-family: 'JetBrains Mono', monospace;"
+			>
+				404
+			</h1>
+			<h2 class="text-2xl font-light text-gray-700 mb-8">
+				Page not found
+			</h2>
+			<a
+				href="/"
+				class="text-pink-600 hover:text-pink-800 font-medium transition-colors duration-200 text-lg"
+			>
+				← Back to Domain Name Hack Club
+			</a>
+		</main>
+	</body>
+</html>
