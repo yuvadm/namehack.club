@@ -1,5 +1,5 @@
 ---
-interface Props {
+export interface Props {
   name: {
     data: {
       name: string;
@@ -8,47 +8,54 @@ interface Props {
       candidate?: boolean;
     };
   };
-  size?: 'large' | 'small';
+  size?: "large" | "small";
   showAsLink?: boolean;
 }
 
-const { name, size = 'large', showAsLink = true } = Astro.props;
+const { name, size = "large", showAsLink = true } = Astro.props;
 const nameParts = name.data.name.toLowerCase().split(" ");
 const domain = name.data.domain.replace(".", "");
 const url = name.data.url || `https://${name.data.domain}`;
-const domainExtension = name.data.domain.split('.')[1];
-const domainBase = name.data.domain.split('.')[0];
+const domainExtension = name.data.domain.split(".")[1];
+const domainBase = name.data.domain.split(".")[0];
 
 const sizeClasses = {
-  large: 'text-2xl',
-  small: 'text-xl'
+  large: "text-2xl",
+  small: "text-xl",
 };
 ---
 
 <span class={`${sizeClasses[size]} break-words`}>
-  {nameParts.map((part, index) => (
-    <>
-      {index > 0 && " "}
-      {part === domain ? (
-        showAsLink ? (
-          <a 
-            href={url} 
-            class="text-blue-600 hover:text-blue-800 hover:underline domain-link"
-            rel={name.data.candidate ? "nofollow" : undefined}
-            data-extension={domainExtension}
-          >
-            <span class="domain-base">{domainBase}</span><span class="domain-extension">{domainExtension}</span>
-          </a>
+  {
+    nameParts.map((part, index) => (
+      <>
+        {index > 0 && " "}
+        {part === domain ? (
+          showAsLink ? (
+            <a
+              href={url}
+              class="text-blue-600 hover:text-blue-800 hover:underline domain-link"
+              rel={name.data.candidate ? "nofollow" : undefined}
+              data-extension={domainExtension}
+            >
+              <span class="domain-base">{domainBase}</span>
+              <span class="domain-extension">{domainExtension}</span>
+            </a>
+          ) : (
+            <span
+              class="text-blue-600 domain-link"
+              data-extension={domainExtension}
+            >
+              <span class="domain-base">{domainBase}</span>
+              <span class="domain-extension">{domainExtension}</span>
+            </span>
+          )
         ) : (
-          <span class="text-blue-600 domain-link" data-extension={domainExtension}>
-            <span class="domain-base">{domainBase}</span><span class="domain-extension">{domainExtension}</span>
-          </span>
-        )
-      ) : (
-        <span>{part}</span>
-      )}
-    </>
-  ))}
+          <span>{part}</span>
+        )}
+      </>
+    ))
+  }
 </span>
 
 <style>
@@ -56,4 +63,5 @@ const sizeClasses = {
     content: ".";
     opacity: 0.7;
   }
-</style> 
+</style>
+

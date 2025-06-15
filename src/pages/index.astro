@@ -60,7 +60,10 @@ const description =
 				class="text-6xl lg:text-7xl font-light tracking-tight mb-6 font-mono"
 				style="letter-spacing: -0.02em;"
 			>
-				<a href="/" class="hover:text-gray-700 transition-colors duration-200">
+				<a
+					href="/"
+					class="hover:text-gray-700 transition-colors duration-200"
+				>
 					Doma<span class="text-gray-400">.</span>in Na<span
 						class="text-gray-400">.</span
 					>me Ha<span class="text-gray-400">.</span>ck Cl<span
@@ -108,13 +111,24 @@ const description =
 					{
 						members.map((name) => (
 							<li>
-								<a 
-									href={name.data.url || `https://${name.data.domain}`}
+								<a
+									href={
+										name.data.url ||
+										`https://${name.data.domain}`
+									}
 									class="block border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200"
-									rel={name.data.candidate ? "nofollow" : undefined}
+									rel={
+										name.data.candidate
+											? "nofollow"
+											: undefined
+									}
 								>
 									<div class="text-lg font-medium mb-1">
-										<NameLink name={name} size="large" showAsLink={false} />
+										<NameLink
+											name={name}
+											size="large"
+											showAsLink={false}
+										/>
 									</div>
 									<div class="text-gray-600 text-sm font-light">
 										{name.data.title}
@@ -139,7 +153,11 @@ const description =
 					{
 						candidates.map((name) => (
 							<li class="p-1 rounded hover:bg-gray-50 transition-colors duration-200 text-center text-xs overflow-hidden">
-								<NameLink name={name} size="small" />
+								<NameLink
+									name={name}
+									size="small"
+									showAsLink={true}
+								/>
 							</li>
 						))
 					}
