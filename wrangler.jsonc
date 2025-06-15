@@ -9,6 +9,10 @@
         {
             "pattern": "namehack.club",
             "custom_domain": true
+        },
+        {
+            "pattern": "www.namehack.club",
+            "custom_domain": true
         }
     ]
 }
