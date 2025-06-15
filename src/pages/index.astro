@@ -107,13 +107,19 @@ const description =
 				>
 					{
 						members.map((name) => (
-							<li class="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200">
-								<div class="text-lg font-medium mb-1">
-									<NameLink name={name} size="large" />
-								</div>
-								<div class="text-gray-600 text-sm font-light">
-									{name.data.title}
-								</div>
+							<li>
+								<a 
+									href={name.data.url || `https://${name.data.domain}`}
+									class="block border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200"
+									rel={name.data.candidate ? "nofollow" : undefined}
+								>
+									<div class="text-lg font-medium mb-1">
+										<NameLink name={name} size="large" showAsLink={false} />
+									</div>
+									<div class="text-gray-600 text-sm font-light">
+										{name.data.title}
+									</div>
+								</a>
 							</li>
 						))
 					}
