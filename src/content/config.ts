@@ -10,6 +10,7 @@ const namesCollection = defineCollection({
     email: z.string().email().optional(),
     github: z.string().optional(),
     candidate: z.boolean().optional(),
+    invalid: z.boolean().optional(),
   }).refine(
     (data) => {
       // If not a candidate, title is required

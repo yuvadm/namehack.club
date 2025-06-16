@@ -2,3 +2,4 @@ domain: aoibhi.nn
 name: Aoibhinn
 github: oibind
 candidate: true
+invalid: true

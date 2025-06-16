@@ -2,3 +2,4 @@ domain: benvenu.to
 name: Christoforus Benvenuto
 github: cbenv
 candidate: true
+invalid: true

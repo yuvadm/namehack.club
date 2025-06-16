@@ -25,10 +25,11 @@ Other optional fields are supported:
 domain: examp.le
 name: Example Foo
 title: UI/UX designer # maximum 80 chars
-url: https://examp.le/about/ # use to specify homepage URL, defaults to https://examp.le
+url: https://examp.le/about/ # use to specify homepage URL if differs from https://examp.le
 email: hi@examp.le
 github: examplefoo
-candidate: true
+candidate: true # candidates that have not yet explicitly approved
+invalid: true # used to mark e.g. broken or expired domains
 ```
 
 Candidates are links to users who have not yet explicitly added their `name` and `title` to the list.
