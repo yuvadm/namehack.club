@@ -13,6 +13,10 @@ const __dirname = path.dirname(__filename);
 const NAMES_DIR = path.join(__dirname, '..', 'src', 'content', 'names');
 const TIMEOUT = 5000; // 5 seconds timeout
 
+// Parse command line arguments
+const args = process.argv.slice(2);
+const VERIFY_INVALID_ONLY = args.includes('--verify-invalid');
+
 function makeRequest(url, useHttps = true) {
   return new Promise((resolve, reject) => {
     const client = useHttps ? https : http;
@@ -22,7 +26,7 @@ function makeRequest(url, useHttps = true) {
       hostname: parsedUrl.hostname,
       port: parsedUrl.port || (useHttps ? 443 : 80),
       path: parsedUrl.pathname + parsedUrl.search,
-      method: 'HEAD',
+      method: 'GET',
       timeout: TIMEOUT,
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -30,9 +34,13 @@ function makeRequest(url, useHttps = true) {
     };
 
     const req = client.request(options, (res) => {
-      resolve({
-        statusCode: res.statusCode,
-        success: res.statusCode >= 200 && res.statusCode < 400
+      // Consume response body to avoid hanging connections
+      res.on('data', () => {});
+      res.on('end', () => {
+        resolve({
+          statusCode: res.statusCode,
+          success: res.statusCode >= 200 && res.statusCode < 400
+        });
       });
     });
 
@@ -83,13 +91,18 @@ async function processYamlFile(filePath) {
     
     if (!data || !data.domain) {
       console.log(`SKIP: ${path.basename(filePath)} - No domain field`);
-      return { updated: false };
+      return { updated: false, skipped: true };
+    }
+
+    // If in verify-invalid mode, skip domains that aren't marked as invalid
+    if (VERIFY_INVALID_ONLY && !data.invalid) {
+      return { updated: false, skipped: true };
     }
 
     const domain = data.domain;
     const explicitUrl = data.url || null;
     
-    console.log(`CHECKING: ${domain}${explicitUrl ? ` (explicit URL: ${explicitUrl})` : ''}`);
+    console.log(`CHECKING: ${domain}${explicitUrl ? ` (explicit URL: ${explicitUrl})` : ''}${data.invalid ? ' (marked invalid)' : ''}`);
     
     const result = await checkDomain(domain, explicitUrl);
     
@@ -128,7 +141,7 @@ async function processYamlFile(filePath) {
     }
   } catch (error) {
     console.error(`ERROR processing ${filePath}: ${error.message}`);
-    return { updated: false };
+    return { updated: false, skipped: false };
   }
 }
 
@@ -138,19 +151,27 @@ async function main() {
       .filter(file => file.endsWith('.yml'))
       .map(file => path.join(NAMES_DIR, file));
 
+    if (VERIFY_INVALID_ONLY) {
+      console.log(`Running in verify-invalid mode - only checking domains marked as invalid\n`);
+    }
     console.log(`Found ${files.length} YAML files to process\n`);
 
     let processedCount = 0;
+    let skippedCount = 0;
     let updatedCount = 0;
     let foundCount = 0;
     let notFoundCount = 0;
 
     for (const file of files) {
       const result = await processYamlFile(file);
-      processedCount++;
       
-      if (result.updated) {
-        updatedCount++;
+      if (result.skipped) {
+        skippedCount++;
+      } else {
+        processedCount++;
+        if (result.updated) {
+          updatedCount++;
+        }
       }
 
       // Small delay to be respectful to servers
@@ -158,7 +179,12 @@ async function main() {
     }
 
     console.log(`\n--- SUMMARY ---`);
+    if (VERIFY_INVALID_ONLY) {
+      console.log(`Mode: Verify invalid domains only`);
+    }
+    console.log(`Total files: ${files.length}`);
     console.log(`Processed: ${processedCount} files`);
+    console.log(`Skipped: ${skippedCount} files`);
     console.log(`Updated: ${updatedCount} files`);
   } catch (error) {
     console.error('Error:', error.message);
