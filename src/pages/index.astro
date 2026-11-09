@@ -1,0 +1,180 @@
+---
+import { getCollection } from "astro:content";
+import NameLink from "../components/NameLink.astro";
+
+import "../styles/global.css";
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+
+const allNames = await getCollection("names");
+const members = allNames.filter((name) => name.data.candidate !== true);
+const candidates = allNames.filter((name) => name.data.candidate === true);
+
+const title = "Domain Name Hack Club";
+const description =
+	"An exclusive club of nerds that own the domain hack to their name";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+
+		<meta name="description" content={description} />
+		<meta
+			name="keywords"
+			content="domain, name, hack, club, exclusive, personal, homepage"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="index, follow" />
+		<meta name="author" content="Yuval Adam" />
+		<link rel="canonical" href={Astro.url} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content={title} />
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:url" content={Astro.url} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:creator" content="@yuvadm" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<!-- Privacy-friendly analytics by Plausible -->
+		<script async src="https://track.magicmonad.com/js/pa-DV9or-AK9tJTmrfO0pE9b.js"></script>
+		<script is:inline>
+			window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+			plausible.init()
+		</script>
+	</head>
+
+	<body class="max-w-5xl mx-auto px-6 py-8">
+		<header class="text-center mb-16">
+			<h1
+				class="text-6xl lg:text-7xl font-light tracking-tight mb-6 font-mono"
+				style="letter-spacing: -0.02em;"
+			>
+				<a
+					href="/"
+					class="hover:text-gray-700 transition-colors duration-200"
+				>
+					Doma<span class="dot"></span>in Na<span class="dot"></span>me Ha<span class="dot"></span>ck Cl<span class="dot"></span>ub
+				</a>
+			</h1>
+			<p
+				class="text-xl lg:text-2xl font-light text-gray-700 max-w-4xl mx-auto leading-relaxed"
+			>
+				An exclusive club of geeks that serve their personal homepage
+				from the
+				<a
+					href="https://en.wikipedia.org/wiki/Domain_hack"
+					class="text-pink-600 hover:text-pink-800 font-medium transition-colors duration-200"
+					>domain hack</a
+				>
+				to their name. Are you one of us? Join the club by opening a pull
+				request on
+				<a
+					href="https://github.com/yuvadm/namehack.club"
+					class="text-pink-600 hover:text-pink-800 font-medium transition-colors duration-200"
+					>Github</a
+				>
+				or send us an email at
+				<a
+					href="mailto:join@namehack.club"
+					class="text-pink-600 hover:text-pink-800 font-medium transition-colors duration-200"
+					>join@namehack.club</a
+				>.
+			</p>
+		</header>
+
+		<main class="space-y-12">
+			<section>
+				<h2
+					class="text-3xl font-semibold mb-8 text-gray-900 flex items-center gap-3"
+				>
+					<span class="text-2xl">💎</span>
+					<span>Members</span>
+				</h2>
+				<ul
+					class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+				>
+					{
+						members.map((name) => (
+							<li>
+								<a
+									href={
+										name.data.url ||
+										`https://${name.data.domain}`
+									}
+									class="group block border border-gray-100 rounded-lg p-4 hover:bg-gray-50 hover:border-gray-200 transition-all duration-200"
+									rel={
+										name.data.candidate
+											? "nofollow"
+											: undefined
+									}
+								>
+									<div class="text-lg font-medium mb-1">
+										<NameLink
+											name={name}
+											size="large"
+											showAsLink={false}
+										/>
+									</div>
+									<div class="text-gray-600 text-sm font-light">
+										{name.data.title}
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section>
+				<h2
+					class="text-3xl font-semibold mb-8 text-gray-900 flex items-center gap-3"
+				>
+					<span class="text-2xl">⭐</span>
+					<span>Candidates</span>
+				</h2>
+				<ul
+					class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2"
+				>
+					{
+						candidates.map((name) => (
+							<li class="p-1 text-center text-xs overflow-hidden">
+								<NameLink
+									name={name}
+									size="small"
+									showAsLink={true}
+								/>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+
+		<hr class="mt-16 mb-8 border-gray-200" />
+		<footer class="text-center text-gray-600 leading-relaxed pb-8">
+			<p class="text-lg font-light">
+				Created by <a
+					href="https://yuv.al"
+					class="text-green-600 hover:text-green-800 font-medium transition-colors duration-200"
+					>Yuval Adam</a
+				>. Maintained collaboratively on <a
+					href="https://github.com/yuvadm/namehack.club"
+					class="text-green-600 hover:text-green-800 font-medium transition-colors duration-200"
+					>Github</a
+				>.
+			</p>
+		</footer>
+	</body>
+</html>

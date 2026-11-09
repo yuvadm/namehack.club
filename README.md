@@ -9,7 +9,7 @@
 
 ## Join the club
 
-Open a new pull request to this repository that adds a new YAML file to the [`names`](names) directory.
+Open a new pull request to this repository that adds a new YAML file to the [`src/content/names`](src/content/names) directory.
 
 If your domain name is `examp.le` the file name should be `examp.le.yml`, and the following minimal fields are required:
 
@@ -25,32 +25,31 @@ Other optional fields are supported:
 domain: examp.le
 name: Example Foo
 title: UI/UX designer # maximum 80 chars
-url: https://examp.le/about/ # use to specify homepage URL, defaults to https://examp.le
+url: https://examp.le/about/ # use to specify homepage URL if differs from https://examp.le
 email: hi@examp.le
 github: examplefoo
-candidate: true
+candidate: true # candidates that have not yet explicitly approved
+invalid: true # used to mark e.g. broken or expired domains
 ```
 
 Candidates are links to users who have not yet explicitly added their `name` and `title` to the list.
 
 ## Development
 
-Local development requires a basic Python environment with [uv](https://docs.astral.sh/uv/) installed.
+Local development requires [Node.js](https://nodejs.org/) and npm installed.
 
 ```bash
-$ uv sync --extra=dev
-$ uv run build
-$ uv run serve
+$ npm install
+$ npm run dev
 ```
 
-Other commands are accessible via:
+Other available commands:
 
 ```bash
-$ uv run cli
+$ npm run build    # Build for production
+$ npm run preview  # Preview production build locally
 ```
 
-Netlify build requires an updated `requirements.txt` file, if dependencies have changed, run:
+## Deployment
 
-```bash
-$ uv pip compile pyproject.toml -o requirements.txt
-```
+Handled automagically on Cloudflare.
